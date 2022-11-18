@@ -1,11 +1,17 @@
-package org.acme.validation;
+package org.matias.models;
 
 
-public class BElement {
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-    public String p;
+public class CElement {
 
-    public long q;
+    @NotEmpty(message="A is required")
+    public String r;
+
+    @NotEmpty(message="A is required")
+    public String s;
 
 
 }
