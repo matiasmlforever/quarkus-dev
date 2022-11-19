@@ -1,9 +1,11 @@
 package org.matias;
 
 import org.matias.models.ValidatedObject;
+import org.matias.service.DataValidationService;
 
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
@@ -17,29 +19,12 @@ import java.util.stream.Collectors;
 
 @Path("/data")
 public class DataResource {
+    @Inject
+    DataValidationService dataValidationService;
 
     @Inject
     Validator validator;
 
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/manual-validation")
-    @POST
-    public Result tryMeManualValidation(ValidatedObject vobject) {
-        Set<ConstraintViolation<ValidatedObject>> violations = validator.validate(vobject);
-        if (violations.isEmpty()) {
-            return new Result("Book is valid! It was validated by manual validation.");
-        } else {
-            return new Result(violations);
-        }
-    }
-
-    @Path("/end-point-method-validation")
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Result tryMeEndPointMethodValidation(@Valid ValidatedObject vobject) {
-        return new Result("Book is valid! It was validated by end point method validation.");
-    }
 
     public static class Result {
 
@@ -67,4 +52,39 @@ public class DataResource {
         }
 
     }
+
+
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/manual-validation")
+    @POST
+    public Result tryMeManualValidation(ValidatedObject vobject) {
+        Set<ConstraintViolation<ValidatedObject>> violations = validator.validate(vobject);
+        if (violations.isEmpty()) {
+            return new Result("tryMeManualValidation - is valid! It was validated by manual validation.");
+        } else {
+            return new Result(violations);
+        }
+    }
+
+    @Path("/end-point-method-validation")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Result tryMeEndPointMethodValidation(@Valid ValidatedObject vobject) {
+        return new Result("tryMeEndPointMethodValidation - is valid! It was validated by end point method validation.");
+    }
+
+
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/service-method-validation")
+    @POST
+    public Result tryMeServiceMethodValidation(ValidatedObject vobject) {
+        try {
+            dataValidationService.validateValidatedObject(vobject);
+            return new Result("tryMeServiceMethodValidation is valid! It was validated by service method validation.");
+        } catch (ConstraintViolationException e) {
+            return new Result(e.getConstraintViolations());
+        }
+    }
+
 }
