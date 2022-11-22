@@ -7,6 +7,10 @@ public class Constants {
 
     // INVALIDS
     public final static String A_REQUIRED = "A is required";
+    public final static String A_I_REQUIRED = "A.i is required";
+    public final static String A_T_REQUIRED = "A.t required";
+    public final static String A_I_NOT_EMPTY = "A.i may not be blank";
+    public final static String A_T_NOT_EMPTY = "A.t may not be blank";
     public final static String B_REQUIRED = "B is required";
     public final static String B_NOT_EMPTY = "B can't be empty";
 

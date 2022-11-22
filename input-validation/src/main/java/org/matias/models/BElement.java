@@ -8,13 +8,12 @@ import static org.matias.Constants.*;
 
 public class BElement {
 
-    @NotNull(message = B_Q_REQUIRED)
-    public Long q;
-
     @NotBlank(message = B_P_NOT_BLANK)
     @NotNull(message = B_P_REQUIRED)
     public String p;
 
+    @NotNull(message = B_Q_REQUIRED)
+    public Long q;
 
 
 }
