@@ -4,15 +4,17 @@ package org.matias.models;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import static org.matias.Constants.*;
+
 public class BElement {
 
-    @NotBlank(message="B.p may not be blank")
-    @NotNull(message="B.p is required")
+    @NotNull(message = B_Q_REQUIRED)
+    public Long q;
+
+    @NotBlank(message = B_P_NOT_BLANK)
+    @NotNull(message = B_P_REQUIRED)
     public String p;
 
-    @NotBlank(message="B.q may not be blank")
-    @NotNull(message="B.q is required")
-    public long q;
 
 
 }

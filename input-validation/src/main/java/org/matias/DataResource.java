@@ -33,6 +33,11 @@ public class DataResource {
             this.message = message;
         }
 
+        Result(boolean success, String message) {
+            this.success = success;
+            this.message = message;
+        }
+
         Result(Set<? extends ConstraintViolation<?>> violations) {
             this.success = false;
             this.message = violations.stream()
