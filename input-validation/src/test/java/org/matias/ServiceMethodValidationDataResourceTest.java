@@ -24,8 +24,6 @@ class ServiceMethodValidationDataResourceTest {
     @TestHTTPResource("service-method-validation")
     URL validationUrl;
 
-    DataResource.Result result;
-
     @BeforeEach
     void setUp() {
     }
