@@ -1,4 +1,5 @@
 # Hibernate Input Validation on Quarkus API
+https://es.quarkus.io/guides/validation
 The following input structure gets validated:
 ```
 {
